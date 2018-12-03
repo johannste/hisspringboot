@@ -11,7 +11,7 @@
  Target Server Version : 50624
  File Encoding         : 65001
 
- Date: 03/12/2018 11:47:24
+ Date: 03/12/2018 12:07:37
 */
 
 SET NAMES utf8mb4;
@@ -130,15 +130,19 @@ CREATE TABLE `identify`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `identify_number`(`identify_number`) USING BTREE,
   INDEX `identify_type`(`identify_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of identify
 -- ----------------------------
-INSERT INTO `identify` VALUES (1, 1, 0, '00000000000000000');
-INSERT INTO `identify` VALUES (2, 1, 1, '00000000000000001');
-INSERT INTO `identify` VALUES (3, 1, 2, '00000000000000002');
-INSERT INTO `identify` VALUES (4, 1, 3, '00000000000000003');
+INSERT INTO `identify` VALUES (1, 0, 0, '00000000000000000');
+INSERT INTO `identify` VALUES (2, 0, 1, '00000000000000001');
+INSERT INTO `identify` VALUES (3, 0, 2, '00000000000000002');
+INSERT INTO `identify` VALUES (4, 0, 3, '00000000000000003');
+INSERT INTO `identify` VALUES (5, 1, 0, '440882199508132346');
+INSERT INTO `identify` VALUES (6, 2, 0, '440882199508132347');
+INSERT INTO `identify` VALUES (7, 3, 0, '440882199508132348');
+INSERT INTO `identify` VALUES (8, 4, 0, '440882199508132349');
 
 -- ----------------------------
 -- Table structure for patient_list
@@ -149,17 +153,21 @@ CREATE TABLE `patient_list`  (
   `name` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `gender` int(1) NOT NULL,
   `age` int(3) NOT NULL,
+  `birthdate` date NOT NULL,
   `identify_type` int(1) NOT NULL,
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_patient_list_identify_type`(`identify_type`) USING BTREE,
   CONSTRAINT `fk_patient_list_identify_type` FOREIGN KEY (`identify_type`) REFERENCES `identify` (`identify_type`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of patient_list
 -- ----------------------------
-INSERT INTO `patient_list` VALUES (1, '李丽', 1, 22, 0, '广东省广州科技企业加速器尚志苑B2栋2楼', '13414937050');
+INSERT INTO `patient_list` VALUES (1, '李丽', 1, 22, '2017-01-01', 0, '广东省广州科技企业加速器尚志苑B2栋2楼', '13414937050');
+INSERT INTO `patient_list` VALUES (2, '赵青', 1, 21, '1997-01-04', 0, '广东省广州华南师范大学尚志苑B1栋2楼', '13414935080');
+INSERT INTO `patient_list` VALUES (3, '钱虎', 0, 23, '1995-08-05', 0, '广东省广州华南师范大学尚志苑C栋2楼', '13414936979');
+INSERT INTO `patient_list` VALUES (4, '曾雪花', 1, 23, '1995-05-13', 0, '广东省湛江市寸金桥29号尚志苑C栋3楼', '13414937053');
 
 SET FOREIGN_KEY_CHECKS = 1;
