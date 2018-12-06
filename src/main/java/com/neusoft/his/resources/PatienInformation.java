@@ -16,8 +16,8 @@ public class PatienInformation {
     private PatientMapper patientMapper;
 
     @GetMapping("/queryIndentify")
-    public Boolean queryIndentify(@RequestParam String identifyNumber){
-        return patientMapper.queryIndentify(identifyNumber);
+    public String queryIdentify(@RequestParam String identifyNumber){
+        return patientMapper.queryIdentify(identifyNumber);
     }
 
 }
