@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 06/12/2018 22:13:56
+ Date: 07/12/2018 22:24:27
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `degree` (
   `name` varchar(5) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `name` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of degree
@@ -49,7 +49,7 @@ CREATE TABLE `department` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `name` (`dept_name`) USING BTREE,
   UNIQUE KEY `eng_name` (`dept_eng_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of department
@@ -89,7 +89,7 @@ CREATE TABLE `doctor` (
   CONSTRAINT `fk_doctor_degree_id` FOREIGN KEY (`degree_id`) REFERENCES `degree` (`id`),
   CONSTRAINT `fk_doctor_department_id` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`),
   CONSTRAINT `fk_doctor_is_expert` FOREIGN KEY (`is_expert`) REFERENCES `expert` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of doctor
@@ -139,7 +139,7 @@ CREATE TABLE `identify` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `identify_number` (`identify_number`) USING BTREE,
   KEY `identify_type` (`identify_type`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of identify
@@ -164,15 +164,18 @@ CREATE TABLE `patient_list` (
   `name` varchar(5) NOT NULL,
   `gender` int(1) NOT NULL,
   `age` int(3) NOT NULL,
+  `province` varchar(10) NOT NULL,
+  `city` varchar(10) NOT NULL,
   `identify_type` int(1) NOT NULL,
-  `address` varchar(100) NOT NULL,
+  `more_address` varchar(100) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `related_name` varchar(5) DEFAULT NULL,
   `related_phone_number` varchar(11) DEFAULT NULL,
   `relationship` int(1) DEFAULT NULL,
   `symptoms` varchar(200) DEFAULT NULL,
   `ill_history` varchar(200) DEFAULT NULL,
-  `region` int(1) DEFAULT NULL,
+  `region` int(1) NOT NULL,
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_patient_list_identify_type` (`identify_type`) USING BTREE,
   KEY `fk_relationship` (`relationship`),
@@ -180,16 +183,16 @@ CREATE TABLE `patient_list` (
   CONSTRAINT `fk_patient_list_identify_type` FOREIGN KEY (`identify_type`) REFERENCES `identify` (`identify_type`),
   CONSTRAINT `fk_patient_list_region` FOREIGN KEY (`region`) REFERENCES `patient_region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_patient_list_relationship` FOREIGN KEY (`relationship`) REFERENCES `patient_relationship` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of patient_list
 -- ----------------------------
 BEGIN;
-INSERT INTO `patient_list` VALUES (1, '李丽', 1, 22, 0, '广东省广州科技企业加速器尚志苑B2栋2楼', '13414937050', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `patient_list` VALUES (2, '赵青', 1, 21, 0, '广东省广州华南师范大学尚志苑B1栋2楼', '13414935080', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `patient_list` VALUES (3, '钱虎', 0, 23, 0, '广东省广州华南师范大学尚志苑C栋2楼', '13414936979', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `patient_list` VALUES (4, '曾雪花', 1, 23, 0, '广东省湛江市寸金桥29号尚志苑C栋3楼', '13414937053', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `patient_list` VALUES (1, '李丽', 1, 22, '广东省', '广州市', 0, '广州科技企业加速器尚志苑B2栋2楼', '13414937050', NULL, NULL, NULL, NULL, NULL, 1, '2018-12-07 21:42:44');
+INSERT INTO `patient_list` VALUES (2, '赵青', 1, 21, '广东省', '广州市', 0, '广州华南师范大学尚志苑B1栋2楼', '13414935080', NULL, NULL, NULL, NULL, NULL, 2, '2018-12-07 21:42:44');
+INSERT INTO `patient_list` VALUES (3, '钱虎', 0, 23, '广东省', '广州市', 0, '广州华南师范大学尚志苑C栋2楼', '13414936979', NULL, NULL, NULL, NULL, NULL, 3, '2018-12-07 21:42:44');
+INSERT INTO `patient_list` VALUES (4, '曾雪花', 1, 23, '广东省', '湛江市', 0, '寸金桥29号尚志苑C栋3楼', '13414937053', NULL, NULL, NULL, NULL, NULL, 4, '2018-12-07 21:42:44');
 COMMIT;
 
 -- ----------------------------
@@ -207,12 +210,12 @@ CREATE TABLE `patient_region` (
 -- Records of patient_region
 -- ----------------------------
 BEGIN;
+INSERT INTO `patient_region` VALUES (6, '住院');
+INSERT INTO `patient_region` VALUES (4, '化验');
+INSERT INTO `patient_region` VALUES (3, '急诊');
+INSERT INTO `patient_region` VALUES (5, '手术');
 INSERT INTO `patient_region` VALUES (1, '挂号');
 INSERT INTO `patient_region` VALUES (2, '门诊');
-INSERT INTO `patient_region` VALUES (3, '急诊');
-INSERT INTO `patient_region` VALUES (4, '化验');
-INSERT INTO `patient_region` VALUES (5, '手术');
-INSERT INTO `patient_region` VALUES (6, '住院');
 COMMIT;
 
 -- ----------------------------
@@ -230,11 +233,11 @@ CREATE TABLE `patient_relationship` (
 -- Records of patient_relationship
 -- ----------------------------
 BEGIN;
-INSERT INTO `patient_relationship` VALUES (1, '父亲');
-INSERT INTO `patient_relationship` VALUES (2, '母亲');
 INSERT INTO `patient_relationship` VALUES (3, '亲戚');
-INSERT INTO `patient_relationship` VALUES (4, '朋友');
 INSERT INTO `patient_relationship` VALUES (5, '其他');
+INSERT INTO `patient_relationship` VALUES (4, '朋友');
+INSERT INTO `patient_relationship` VALUES (2, '母亲');
+INSERT INTO `patient_relationship` VALUES (1, '父亲');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

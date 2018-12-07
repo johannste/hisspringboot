@@ -6,11 +6,19 @@ public class Patient {
     private String name;
     private Integer gender;
     private Integer age;
-    private Date birthdate;
     private Integer identifyType;
-    private String address;
+    private String province;
+    private String city;
+    private String moreAddress;
     private String phone;
-    private String identifyNumber;
+    private String relatedName;
+    private String relatedPhoneNumber;
+    private Integer relationship;
+    private String symptoms;
+    private String illHistory;
+    private Integer region;
+    private Date createDate;
+    private String idCard;
 
     public String getName() {
         return name;
@@ -36,14 +44,6 @@ public class Patient {
         this.age = age;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
     public Integer getIdentifyType() {
         return identifyType;
     }
@@ -52,12 +52,28 @@ public class Patient {
         this.identifyType = identifyType;
     }
 
-    public String getAddress() {
-        return address;
+    public String getProvince() {
+        return province;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getMoreAddress() {
+        return moreAddress;
+    }
+
+    public void setMoreAddress(String moreAddress) {
+        this.moreAddress = moreAddress;
     }
 
     public String getPhone() {
@@ -68,11 +84,67 @@ public class Patient {
         this.phone = phone;
     }
 
-    public String getIdentifyNumber() {
-        return identifyNumber;
+    public String getRelatedName() {
+        return relatedName;
     }
 
-    public void setIdentifyNumber(String identifyNumber) {
-        this.identifyNumber = identifyNumber;
+    public void setRelatedName(String relatedName) {
+        this.relatedName = relatedName;
+    }
+
+    public String getRelatedPhoneNumber() {
+        return relatedPhoneNumber;
+    }
+
+    public void setRelatedPhoneNumber(String relatedPhoneNumber) {
+        this.relatedPhoneNumber = relatedPhoneNumber;
+    }
+
+    public Integer getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(Integer relationship) {
+        this.relationship = relationship;
+    }
+
+    public String getSymptoms() {
+        return symptoms;
+    }
+
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
+    }
+
+    public String getIllHistory() {
+        return illHistory;
+    }
+
+    public void setIllHistory(String illHistory) {
+        this.illHistory = illHistory;
+    }
+
+    public Integer getRegion() {
+        return region;
+    }
+
+    public void setRegion(Integer region) {
+        this.region = region;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 }

@@ -1,12 +1,24 @@
 package com.neusoft.his.mapper;
 
-import org.apache.ibatis.annotations.Select;
+import com.neusoft.his.model.Region;
+import com.neusoft.his.model.Relationship;
+import org.apache.ibatis.annotations.*;
 
 import javax.websocket.server.PathParam;
+import java.util.List;
+import java.util.Map;
 
 public interface PatientMapper {
 
+    @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
+    Boolean registerPatient(Map patientMap);
 
-    @Select("SELECT pl.`name` FROM patient_list pl LEFT JOIN identify i ON pl.id=i.uid WHERE i.identify_number=#{identifyNumber}")
+    @Select("SELECT pl.`name` FROM patient_list pl LEFT JOIN identify i ON pl.id=i.uid WHERE i.identify_number=#{identifyNumber};")
     String queryIdentify(@PathParam("card_number") String identifyNumber);
+
+    @Select("SELECT * FROM patient_region;")
+    List<Region> queryRegion();
+
+    @Select("SELECT * FROM patient_relationship;")
+    List<Relationship> queryRelationship();
 }
