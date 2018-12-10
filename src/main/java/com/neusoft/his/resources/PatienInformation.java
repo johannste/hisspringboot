@@ -1,6 +1,7 @@
 package com.neusoft.his.resources;
 
 import com.neusoft.his.mapper.PatientMapper;
+import com.neusoft.his.model.IdentifyType;
 import com.neusoft.his.model.Patient;
 import com.neusoft.his.model.Region;
 import com.neusoft.his.model.Relationship;
@@ -38,7 +39,12 @@ public class PatienInformation {
         return patientMapper.registerPatient(patientMap);
     }
 
-    @GetMapping("/queryIndentify")
+    @GetMapping("/queryIdentifyType")
+    public List<IdentifyType> queryIdentifyType() {
+        return patientMapper.queryIdentifyType();
+    }
+
+    @GetMapping("/queryIdentify")
     public String queryIdentify(@RequestParam String identifyNumber) {
         return patientMapper.queryIdentify(identifyNumber);
     }
