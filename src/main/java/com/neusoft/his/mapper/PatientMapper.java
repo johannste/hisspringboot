@@ -1,6 +1,7 @@
 package com.neusoft.his.mapper;
 
 import com.neusoft.his.model.IdentifyType;
+import com.neusoft.his.model.Patient;
 import com.neusoft.his.model.Region;
 import com.neusoft.his.model.Relationship;
 import org.apache.ibatis.annotations.*;
@@ -18,7 +19,7 @@ public interface PatientMapper {
     List<IdentifyType> queryIdentifyType();
 
     @Select("SELECT pl.`name` FROM patient_list pl LEFT JOIN identify i ON pl.id=i.uid WHERE i.identify_number=#{identifyNumber};")
-    String queryIdentify(@PathParam("card_number") String identifyNumber);
+    List<Patient> queryIdentify(@PathParam("card_number") String identifyNumber);
 
     @Select("SELECT * FROM patient_region;")
     List<Region> queryRegion();

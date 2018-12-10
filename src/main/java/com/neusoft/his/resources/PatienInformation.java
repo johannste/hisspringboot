@@ -45,7 +45,7 @@ public class PatienInformation {
     }
 
     @GetMapping("/queryIdentify")
-    public String queryIdentify(@RequestParam String identifyNumber) {
+    public List<Patient> queryIdentify(@RequestParam String identifyNumber) {
         return patientMapper.queryIdentify(identifyNumber);
     }
 
