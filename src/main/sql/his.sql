@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 07/12/2018 22:24:27
+ Date: 10/12/2018 15:41:24
 */
 
 SET NAMES utf8mb4;
@@ -138,7 +138,9 @@ CREATE TABLE `identify` (
   `identify_number` varchar(18) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `identify_number` (`identify_number`) USING BTREE,
-  KEY `identify_type` (`identify_type`) USING BTREE
+  KEY `identify_type` (`identify_type`) USING BTREE,
+  KEY `fk_identify_uid` (`uid`),
+  CONSTRAINT `fk_identify_uid` FOREIGN KEY (`uid`) REFERENCES `identify_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
@@ -153,6 +155,27 @@ INSERT INTO `identify` VALUES (5, 1, 0, '440882199508132346');
 INSERT INTO `identify` VALUES (6, 2, 0, '440882199508132347');
 INSERT INTO `identify` VALUES (7, 3, 0, '440882199508132348');
 INSERT INTO `identify` VALUES (8, 4, 0, '211234199402141291');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for identify_type
+-- ----------------------------
+DROP TABLE IF EXISTS `identify_type`;
+CREATE TABLE `identify_type` (
+  `id` int(1) NOT NULL,
+  `type` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of identify_type
+-- ----------------------------
+BEGIN;
+INSERT INTO `identify_type` VALUES (0, '身份证');
+INSERT INTO `identify_type` VALUES (1, '医保卡');
+INSERT INTO `identify_type` VALUES (2, '农合卡');
+INSERT INTO `identify_type` VALUES (3, '健康卡');
+INSERT INTO `identify_type` VALUES (4, '熙康卡');
 COMMIT;
 
 -- ----------------------------
