@@ -1,10 +1,7 @@
 package com.neusoft.his.resources;
 
 import com.neusoft.his.mapper.PatientMapper;
-import com.neusoft.his.model.IdentifyType;
-import com.neusoft.his.model.Patient;
-import com.neusoft.his.model.Region;
-import com.neusoft.his.model.Relationship;
+import com.neusoft.his.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,13 +43,18 @@ public class PatienInformation {
 
     @GetMapping("/getLastSerialNumber")
     public String getLastSerialNumber() {
-
+//        TODO
         return "1234567890";
     }
 
     @GetMapping("/queryIdentify")
     public List<Patient> queryIdentify(@RequestParam String identifyNumber) {
         return patientMapper.queryIdentify(identifyNumber);
+    }
+
+    @GetMapping("/queryDignoseTimeRange")
+    public List<DignoseTimeRange> queryDignoseTimeRange() {
+        return patientMapper.queryDignoseTimeRange();
     }
 
     @GetMapping("/queryRegion")

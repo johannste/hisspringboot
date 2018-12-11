@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 11/12/2018 10:22:41
+ Date: 11/12/2018 16:13:40
 */
 
 SET NAMES utf8mb4;
@@ -66,6 +66,47 @@ INSERT INTO `department` VALUES (8, '精神科', 'Psychiatry');
 INSERT INTO `department` VALUES (9, '护士科', 'Nursing');
 INSERT INTO `department` VALUES (10, '胸心外科', 'Cardiothoracic_Surgery');
 INSERT INTO `department` VALUES (11, '口腔科', 'Stomatology');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for dignose_time_range
+-- ----------------------------
+DROP TABLE IF EXISTS `dignose_time_range`;
+CREATE TABLE `dignose_time_range` (
+  `id` int(2) NOT NULL,
+  `range` varchar(13) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `range` (`range`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dignose_time_range
+-- ----------------------------
+BEGIN;
+INSERT INTO `dignose_time_range` VALUES (1, '00:00 - 01:00');
+INSERT INTO `dignose_time_range` VALUES (2, '01:00 - 02:00');
+INSERT INTO `dignose_time_range` VALUES (3, '02:00 - 03:00');
+INSERT INTO `dignose_time_range` VALUES (4, '03:00 - 04:00');
+INSERT INTO `dignose_time_range` VALUES (5, '04:00 - 05:00');
+INSERT INTO `dignose_time_range` VALUES (6, '05:00 - 06:00');
+INSERT INTO `dignose_time_range` VALUES (7, '06:00 - 07:00');
+INSERT INTO `dignose_time_range` VALUES (8, '07:00 - 08:00');
+INSERT INTO `dignose_time_range` VALUES (9, '08:00 - 09:00');
+INSERT INTO `dignose_time_range` VALUES (10, '09:00 - 10:00');
+INSERT INTO `dignose_time_range` VALUES (11, '10:00 - 11:00');
+INSERT INTO `dignose_time_range` VALUES (12, '11:00 - 12:00');
+INSERT INTO `dignose_time_range` VALUES (13, '12:00 - 13:00');
+INSERT INTO `dignose_time_range` VALUES (14, '13:00 - 14:00');
+INSERT INTO `dignose_time_range` VALUES (15, '14:00 - 15:00');
+INSERT INTO `dignose_time_range` VALUES (16, '15:00 - 16:00');
+INSERT INTO `dignose_time_range` VALUES (17, '16:00 - 17:00');
+INSERT INTO `dignose_time_range` VALUES (18, '17:00 - 18:00');
+INSERT INTO `dignose_time_range` VALUES (19, '18:00 - 19:00');
+INSERT INTO `dignose_time_range` VALUES (20, '19:00 - 20:00');
+INSERT INTO `dignose_time_range` VALUES (21, '20:00 - 21:00');
+INSERT INTO `dignose_time_range` VALUES (22, '21:00 - 22:00');
+INSERT INTO `dignose_time_range` VALUES (23, '22:00 - 23:00');
+INSERT INTO `dignose_time_range` VALUES (24, '23:00 - 24:00');
 COMMIT;
 
 -- ----------------------------

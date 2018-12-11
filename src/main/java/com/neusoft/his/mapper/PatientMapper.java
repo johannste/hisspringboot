@@ -1,9 +1,6 @@
 package com.neusoft.his.mapper;
 
-import com.neusoft.his.model.IdentifyType;
-import com.neusoft.his.model.Patient;
-import com.neusoft.his.model.Region;
-import com.neusoft.his.model.Relationship;
+import com.neusoft.his.model.*;
 import org.apache.ibatis.annotations.*;
 
 import javax.websocket.server.PathParam;
@@ -20,6 +17,9 @@ public interface PatientMapper {
 
     @Select("SELECT pl.`name` FROM patient_list pl LEFT JOIN identify i ON pl.id=i.uid WHERE i.identify_number=#{identifyNumber};")
     List<Patient> queryIdentify(@PathParam("card_number") String identifyNumber);
+
+    @Select("SELECT * FROM dignose_time_range;")
+    List<DignoseTimeRange> queryDignoseTimeRange();
 
     @Select("SELECT * FROM patient_region;")
     List<Region> queryRegion();
