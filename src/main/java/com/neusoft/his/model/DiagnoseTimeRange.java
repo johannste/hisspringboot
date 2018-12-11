@@ -1,6 +1,6 @@
 package com.neusoft.his.model;
 
-public class DignoseTimeRange {
+public class DiagnoseTimeRange {
     private Integer id;
     private String range;
 
@@ -12,11 +12,11 @@ public class DignoseTimeRange {
         this.id = id;
     }
 
-    public String getType() {
+    public String getRange() {
         return range;
     }
 
-    public void setType(String type) {
-        this.range = type;
+    public void setRange(String range) {
+        this.range = range;
     }
 }

@@ -52,9 +52,9 @@ public class PatienInformation {
         return patientMapper.queryIdentify(identifyNumber);
     }
 
-    @GetMapping("/queryDignoseTimeRange")
-    public List<DignoseTimeRange> queryDignoseTimeRange() {
-        return patientMapper.queryDignoseTimeRange();
+    @GetMapping("/queryDiagnoseTimeRange")
+    public List<DiagnoseTimeRange> queryDiagnoseTimeRange() {
+        return patientMapper.queryDiagnoseTimeRange();
     }
 
     @GetMapping("/queryRegion")
