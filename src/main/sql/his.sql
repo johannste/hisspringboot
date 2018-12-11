@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 11/12/2018 23:22:23
+ Date: 11/12/2018 23:40:19
 */
 
 SET NAMES utf8mb4;
@@ -315,7 +315,7 @@ CREATE TABLE `register_manager` (
   `identify_number` varchar(18) NOT NULL,
   `department_id` int(1) NOT NULL,
   `doctor_id` int(11) NOT NULL,
-  `regester_date` date NOT NULL,
+  `register_date` date NOT NULL,
   `diagnose_time` int(2) NOT NULL,
   `expenses` int(11) NOT NULL,
   PRIMARY KEY (`id`),

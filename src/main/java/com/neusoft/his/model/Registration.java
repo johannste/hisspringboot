@@ -8,7 +8,7 @@ public class Registration {
     private String identifyNumber;
     private Integer departmentId;
     private Integer doctorId;
-    private Date regesterDate;
+    private Date registerDate;
     private String diagnoseTime;
     private Integer expenses;
 
@@ -52,12 +52,12 @@ public class Registration {
         this.doctorId = doctorId;
     }
 
-    public Date getRegesterDate() {
-        return regesterDate;
+    public Date getRegisterDate() {
+        return registerDate;
     }
 
-    public void setRegesterDate(Date regesterDate) {
-        this.regesterDate = regesterDate;
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
     public String getDiagnoseTime() {
