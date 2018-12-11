@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 11/12/2018 16:13:40
+ Date: 11/12/2018 23:22:23
 */
 
 SET NAMES utf8mb4;
@@ -69,10 +69,10 @@ INSERT INTO `department` VALUES (11, '口腔科', 'Stomatology');
 COMMIT;
 
 -- ----------------------------
--- Table structure for dignose_time_range
+-- Table structure for diagnose_time_range
 -- ----------------------------
-DROP TABLE IF EXISTS `dignose_time_range`;
-CREATE TABLE `dignose_time_range` (
+DROP TABLE IF EXISTS `diagnose_time_range`;
+CREATE TABLE `diagnose_time_range` (
   `id` int(2) NOT NULL,
   `range` varchar(13) NOT NULL,
   PRIMARY KEY (`id`),
@@ -80,33 +80,33 @@ CREATE TABLE `dignose_time_range` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of dignose_time_range
+-- Records of diagnose_time_range
 -- ----------------------------
 BEGIN;
-INSERT INTO `dignose_time_range` VALUES (1, '00:00 - 01:00');
-INSERT INTO `dignose_time_range` VALUES (2, '01:00 - 02:00');
-INSERT INTO `dignose_time_range` VALUES (3, '02:00 - 03:00');
-INSERT INTO `dignose_time_range` VALUES (4, '03:00 - 04:00');
-INSERT INTO `dignose_time_range` VALUES (5, '04:00 - 05:00');
-INSERT INTO `dignose_time_range` VALUES (6, '05:00 - 06:00');
-INSERT INTO `dignose_time_range` VALUES (7, '06:00 - 07:00');
-INSERT INTO `dignose_time_range` VALUES (8, '07:00 - 08:00');
-INSERT INTO `dignose_time_range` VALUES (9, '08:00 - 09:00');
-INSERT INTO `dignose_time_range` VALUES (10, '09:00 - 10:00');
-INSERT INTO `dignose_time_range` VALUES (11, '10:00 - 11:00');
-INSERT INTO `dignose_time_range` VALUES (12, '11:00 - 12:00');
-INSERT INTO `dignose_time_range` VALUES (13, '12:00 - 13:00');
-INSERT INTO `dignose_time_range` VALUES (14, '13:00 - 14:00');
-INSERT INTO `dignose_time_range` VALUES (15, '14:00 - 15:00');
-INSERT INTO `dignose_time_range` VALUES (16, '15:00 - 16:00');
-INSERT INTO `dignose_time_range` VALUES (17, '16:00 - 17:00');
-INSERT INTO `dignose_time_range` VALUES (18, '17:00 - 18:00');
-INSERT INTO `dignose_time_range` VALUES (19, '18:00 - 19:00');
-INSERT INTO `dignose_time_range` VALUES (20, '19:00 - 20:00');
-INSERT INTO `dignose_time_range` VALUES (21, '20:00 - 21:00');
-INSERT INTO `dignose_time_range` VALUES (22, '21:00 - 22:00');
-INSERT INTO `dignose_time_range` VALUES (23, '22:00 - 23:00');
-INSERT INTO `dignose_time_range` VALUES (24, '23:00 - 24:00');
+INSERT INTO `diagnose_time_range` VALUES (1, '00:00 - 01:00');
+INSERT INTO `diagnose_time_range` VALUES (2, '01:00 - 02:00');
+INSERT INTO `diagnose_time_range` VALUES (3, '02:00 - 03:00');
+INSERT INTO `diagnose_time_range` VALUES (4, '03:00 - 04:00');
+INSERT INTO `diagnose_time_range` VALUES (5, '04:00 - 05:00');
+INSERT INTO `diagnose_time_range` VALUES (6, '05:00 - 06:00');
+INSERT INTO `diagnose_time_range` VALUES (7, '06:00 - 07:00');
+INSERT INTO `diagnose_time_range` VALUES (8, '07:00 - 08:00');
+INSERT INTO `diagnose_time_range` VALUES (9, '08:00 - 09:00');
+INSERT INTO `diagnose_time_range` VALUES (10, '09:00 - 10:00');
+INSERT INTO `diagnose_time_range` VALUES (11, '10:00 - 11:00');
+INSERT INTO `diagnose_time_range` VALUES (12, '11:00 - 12:00');
+INSERT INTO `diagnose_time_range` VALUES (13, '12:00 - 13:00');
+INSERT INTO `diagnose_time_range` VALUES (14, '13:00 - 14:00');
+INSERT INTO `diagnose_time_range` VALUES (15, '14:00 - 15:00');
+INSERT INTO `diagnose_time_range` VALUES (16, '15:00 - 16:00');
+INSERT INTO `diagnose_time_range` VALUES (17, '16:00 - 17:00');
+INSERT INTO `diagnose_time_range` VALUES (18, '17:00 - 18:00');
+INSERT INTO `diagnose_time_range` VALUES (19, '18:00 - 19:00');
+INSERT INTO `diagnose_time_range` VALUES (20, '19:00 - 20:00');
+INSERT INTO `diagnose_time_range` VALUES (21, '20:00 - 21:00');
+INSERT INTO `diagnose_time_range` VALUES (22, '21:00 - 22:00');
+INSERT INTO `diagnose_time_range` VALUES (23, '22:00 - 23:00');
+INSERT INTO `diagnose_time_range` VALUES (24, '23:00 - 24:00');
 COMMIT;
 
 -- ----------------------------
@@ -303,5 +303,33 @@ INSERT INTO `patient_relationship` VALUES (4, '朋友');
 INSERT INTO `patient_relationship` VALUES (2, '母亲');
 INSERT INTO `patient_relationship` VALUES (1, '父亲');
 COMMIT;
+
+-- ----------------------------
+-- Table structure for register_manager
+-- ----------------------------
+DROP TABLE IF EXISTS `register_manager`;
+CREATE TABLE `register_manager` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `register_number` varchar(12) NOT NULL,
+  `identify_type` int(1) NOT NULL,
+  `identify_number` varchar(18) NOT NULL,
+  `department_id` int(1) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `regester_date` date NOT NULL,
+  `diagnose_time` int(2) NOT NULL,
+  `expenses` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `register_number` (`register_number`),
+  UNIQUE KEY `identify_number` (`identify_number`),
+  KEY `fk_register_manager_diagnose_time` (`diagnose_time`),
+  KEY `fk_register_manager_identify_type` (`identify_type`),
+  KEY `fk_register_manager_department_id` (`department_id`),
+  KEY `fk_register_manager_doctor_id` (`doctor_id`),
+  CONSTRAINT `fk_register_manager_department_id` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`),
+  CONSTRAINT `fk_register_manager_diagnose_time` FOREIGN KEY (`diagnose_time`) REFERENCES `diagnose_time_range` (`id`),
+  CONSTRAINT `fk_register_manager_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`),
+  CONSTRAINT `fk_register_manager_identify_number` FOREIGN KEY (`identify_number`) REFERENCES `identify` (`identify_number`),
+  CONSTRAINT `fk_register_manager_identify_type` FOREIGN KEY (`identify_type`) REFERENCES `identify_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

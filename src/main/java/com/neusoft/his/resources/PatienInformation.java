@@ -17,6 +17,13 @@ public class PatienInformation {
     @Autowired
     private PatientMapper patientMapper;
 
+    @PostMapping("/registration")
+    public Boolean registration(@RequestBody Registration registration) {
+        Map registrationMap = new HashMap();
+        registrationMap.put("register_number", registration.getRegisterNumber().toString());
+        return patientMapper.registration(registrationMap);
+    }
+
     @PostMapping("/registerPatient")
     public Boolean registerPatient(@RequestBody Patient patient) {
         Map patientMap = new HashMap();
