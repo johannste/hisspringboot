@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 10/12/2018 15:41:24
+ Date: 11/12/2018 10:22:41
 */
 
 SET NAMES utf8mb4;
@@ -187,10 +187,10 @@ CREATE TABLE `patient_list` (
   `name` varchar(5) NOT NULL,
   `gender` int(1) NOT NULL,
   `age` int(3) NOT NULL,
-  `province` varchar(10) NOT NULL,
-  `city` varchar(10) NOT NULL,
+  `province` varchar(10) DEFAULT NULL,
+  `city` varchar(10) DEFAULT NULL,
   `identify_type` int(1) NOT NULL,
-  `more_address` varchar(100) NOT NULL,
+  `more_address` varchar(100) DEFAULT NULL,
   `phone` varchar(11) NOT NULL,
   `related_name` varchar(5) DEFAULT NULL,
   `related_phone_number` varchar(11) DEFAULT NULL,
@@ -206,7 +206,7 @@ CREATE TABLE `patient_list` (
   CONSTRAINT `fk_patient_list_identify_type` FOREIGN KEY (`identify_type`) REFERENCES `identify` (`identify_type`),
   CONSTRAINT `fk_patient_list_region` FOREIGN KEY (`region`) REFERENCES `patient_region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_patient_list_relationship` FOREIGN KEY (`relationship`) REFERENCES `patient_relationship` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of patient_list
