@@ -21,7 +21,7 @@ public class PatienInformation {
     private PatientMapper patientMapper;
 
     @PostMapping("/registerPatient")
-    public Boolean registerPatient(@RequestBody Patient patient){
+    public Boolean registerPatient(@RequestBody Patient patient) {
         Map patientMap = new HashMap();
         patientMap.put("name", patient.getName().toString());
         patientMap.put("gender", patient.getGender().toString());
@@ -32,7 +32,7 @@ public class PatienInformation {
         patientMap.put("phone", patient.getPhone().toString());
         patientMap.put("related_name", patient.getRelatedName().toString());
         patientMap.put("related_phone_number", patient.getRelatedPhoneNumber().toString());
-        patientMap.put("relationship", patient.getRelationship().toString());
+        patientMap.put("relationship", null == patient.getRelationship() ? null : patient.getRelationship().toString());
         patientMap.put("symptoms", patient.getSymptoms().toString());
         patientMap.put("ill_history", patient.getIllHistory().toString());
         patientMap.put("region", patient.getRegion().toString());
@@ -44,18 +44,24 @@ public class PatienInformation {
         return patientMapper.queryIdentifyType();
     }
 
+    @GetMapping("/getLastSerialNumber")
+    public String getLastSerialNumber() {
+
+        return "1234567890";
+    }
+
     @GetMapping("/queryIdentify")
     public List<Patient> queryIdentify(@RequestParam String identifyNumber) {
         return patientMapper.queryIdentify(identifyNumber);
     }
 
     @GetMapping("/queryRegion")
-    public List<Region> queryRegion(){
+    public List<Region> queryRegion() {
         return patientMapper.queryRegion();
     }
 
     @GetMapping("/queryRelationship")
-    public List<Relationship> queryRelationship(){
+    public List<Relationship> queryRelationship() {
         return patientMapper.queryRelationship();
     }
 }
