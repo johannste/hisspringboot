@@ -3,7 +3,9 @@ package com.neusoft.his.util;
 public class StringUtil {
     private StringUtil() {
     }
+
     static final int DEFAULT_LENGTH = 10;
+
     /**
      * 得到10位的序列号,长度不足10位,前面补0
      *
