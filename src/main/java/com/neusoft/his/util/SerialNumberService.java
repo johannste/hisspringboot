@@ -18,7 +18,7 @@ public interface SerialNumberService {
      */
     String generate(String bizCode) throws ServiceException;
 
-    //其实，应该对bizCode做白名单验证,以免恶意伪造
+    // 其实，应该对bizCode做白名单验证,以免恶意伪造
     default boolean isLegal(String bizCode) {
         if (bizCode == null || bizCode.length() != 2) {
             throw new RuntimeException("bizCode: " + bizCode + "异常");

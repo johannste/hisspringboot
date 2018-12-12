@@ -3,7 +3,7 @@ package com.neusoft.his.util;
 public class RedisDAOImpl implements RedisDAO {
     @Override
     public String get(String key) {
-        return null;
+        return "1234567890";
     }
 
     @Override
