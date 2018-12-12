@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface PatientMapper {
 
-    @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
-    Boolean registration(Map patientMap);
+    @Insert("INSERT INTO register_manager VALUES (NULL, #{register_number}, #{identify_type}, #{identify_number}, #{department_id}, #{doctor_id}, #{register_date}, #{diagnose_time}, #{expense});")
+    Boolean registration(Map registrationMap);
 
     @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
     Boolean registerPatient(Map patientMap);

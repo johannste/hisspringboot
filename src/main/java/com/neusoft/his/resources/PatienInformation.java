@@ -21,6 +21,13 @@ public class PatienInformation {
     public Boolean registration(@RequestBody Registration registration) {
         Map registrationMap = new HashMap();
         registrationMap.put("register_number", registration.getRegisterNumber().toString());
+        registrationMap.put("identify_type", registration.getIdentifyType().toString());
+        registrationMap.put("identify_number", registration.getIdentifyNumber().toString());
+        registrationMap.put("department_id", registration.getDepartmentId().toString());
+        registrationMap.put("doctor_id", registration.getDoctorId().toString());
+        registrationMap.put("register_date", registration.getRegisterDate().toString());
+        registrationMap.put("diagnose_time", registration.getDiagnoseTime().toString());
+        registrationMap.put("expense", registration.getExpense().toString());
         return patientMapper.registration(registrationMap);
     }
 
