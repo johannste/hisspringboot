@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 11/12/2018 23:40:19
+ Date: 13/12/2018 12:26:24
 */
 
 SET NAMES utf8mb4;
@@ -310,7 +310,7 @@ COMMIT;
 DROP TABLE IF EXISTS `register_manager`;
 CREATE TABLE `register_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `register_number` varchar(12) NOT NULL,
+  `register_number` varchar(20) NOT NULL,
   `identify_type` int(1) NOT NULL,
   `identify_number` varchar(18) NOT NULL,
   `department_id` int(1) NOT NULL,
@@ -319,17 +319,27 @@ CREATE TABLE `register_manager` (
   `diagnose_time` int(2) NOT NULL,
   `expenses` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `register_number` (`register_number`),
-  UNIQUE KEY `identify_number` (`identify_number`),
   KEY `fk_register_manager_diagnose_time` (`diagnose_time`),
   KEY `fk_register_manager_identify_type` (`identify_type`),
   KEY `fk_register_manager_department_id` (`department_id`),
   KEY `fk_register_manager_doctor_id` (`doctor_id`),
+  KEY `fk_register_manager_identify_number` (`identify_number`),
   CONSTRAINT `fk_register_manager_department_id` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`),
   CONSTRAINT `fk_register_manager_diagnose_time` FOREIGN KEY (`diagnose_time`) REFERENCES `diagnose_time_range` (`id`),
   CONSTRAINT `fk_register_manager_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`),
   CONSTRAINT `fk_register_manager_identify_number` FOREIGN KEY (`identify_number`) REFERENCES `identify` (`identify_number`),
   CONSTRAINT `fk_register_manager_identify_type` FOREIGN KEY (`identify_type`) REFERENCES `identify_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of register_manager
+-- ----------------------------
+BEGIN;
+INSERT INTO `register_manager` VALUES (1, '20181113000000000001', 0, '211234199402141291', 2, 1, '2018-12-13', 5, 8);
+INSERT INTO `register_manager` VALUES (2, '20181113000000000002', 0, '211234199402141291', 1, 5, '2018-12-13', 5, 12);
+INSERT INTO `register_manager` VALUES (3, '20181113000000000003', 0, '211234199402141291', 7, 3, '2018-12-13', 5, 8);
+INSERT INTO `register_manager` VALUES (4, '20181113000000000004', 0, '440882199508132348', 4, 11, '2018-12-13', 5, 8);
+INSERT INTO `register_manager` VALUES (5, '20181113000000000005', 0, '440882199508132348', 4, 11, '2018-12-13', 14, 8);
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

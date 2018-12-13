@@ -2,8 +2,8 @@ package com.neusoft.his.util;
 
 import java.util.Calendar;
 
-public class TimeUtil {
-    private TimeUtil() {
+public class CurrentDate {
+    private CurrentDate() {
     }
 
     public static String getToday() {

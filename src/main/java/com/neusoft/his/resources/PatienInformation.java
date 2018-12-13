@@ -2,9 +2,12 @@ package com.neusoft.his.resources;
 
 import com.neusoft.his.mapper.PatientMapper;
 import com.neusoft.his.model.*;
+import com.neusoft.his.util.SerialNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.xml.rpc.ServiceException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +19,9 @@ public class PatienInformation {
 
     @Autowired
     private PatientMapper patientMapper;
+
+    @Resource
+    private SerialNumberService serialNumberService;
 
     @PostMapping("/registration")
     public Boolean registration(@RequestBody Registration registration) {
@@ -55,10 +61,14 @@ public class PatienInformation {
         return patientMapper.queryIdentifyType();
     }
 
-    @GetMapping("/getLastSerialNumber")
-    public String getLastSerialNumber() {
-//        TODO
-        return "1234567890";
+    @PostMapping("/getLastSerialNumber")
+    public String getLastSerialNumber(@RequestParam String bizCode) {
+        try {
+            return serialNumberService.generate(bizCode);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GetMapping("/queryIdentify")

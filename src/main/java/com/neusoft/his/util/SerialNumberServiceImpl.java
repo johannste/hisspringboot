@@ -13,18 +13,21 @@ public class SerialNumberServiceImpl implements SerialNumberService {
 
     @Override
     public String generate(String bizCode) throws ServiceException {
-        // 检查业务码
         boolean isLegal = isLegal(bizCode);
         if (!isLegal) {
             throw new ServiceException("bizCode参数不合法");
         }
-        // 获取今天的日期:yyyyMMdd
-        String date = TimeUtil.getToday();
-        // 构造redis的key
-        String key = SERIAL_NUMBER + date;
-        // 自增
-        long sequence = redisDAO.incr(key);
-        String seq = StringUtil.getSequence(sequence);
+        String date = CurrentDate.getToday();
+        String key = null;
+        switch (bizCode) {
+            case "00":
+                key = SERIAL_NUMBER_Register + date;
+                break;
+            default:
+                throw new ServiceException("bizCode参数不合法");
+        }
+        long sequence = redisDAO.incr(key, key);
+        String seq = SequenceUtil.getSequence(sequence);
         StringBuilder sb = new StringBuilder();
         sb.append(date).append(bizCode).append(seq);
         String serial = sb.toString();

@@ -1,7 +1,7 @@
 package com.neusoft.his.util;
 
-public class StringUtil {
-    private StringUtil() {
+public class SequenceUtil {
+    private SequenceUtil() {
     }
 
     static final int DEFAULT_LENGTH = 10;
