@@ -1,5 +1,5 @@
 package com.neusoft.his.util;
 
 public interface RedisDAO {
-    long incr(String key, String prefix);
+    long incr(String key);
 }

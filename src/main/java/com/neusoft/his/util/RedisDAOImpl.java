@@ -9,10 +9,10 @@ import redis.clients.jedis.Transaction;
 public class RedisDAOImpl implements RedisDAO {
 
     @Override
-    public long incr(String key, String prefix) {
+    public long incr(String key) {
         Jedis jedis = new Jedis("localhost", 6379);
         jedis.auth("redis");
-        String jedisKey = key + prefix;
+        String jedisKey = key;
         Transaction tx = jedis.multi();
         Response<Long> incr = tx.incr(jedisKey);
         tx.exec();

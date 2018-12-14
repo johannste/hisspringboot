@@ -26,7 +26,7 @@ public class SerialNumberServiceImpl implements SerialNumberService {
             default:
                 throw new ServiceException("bizCode参数不合法");
         }
-        long sequence = redisDAO.incr(key, key);
+        long sequence = redisDAO.incr(key);
         String seq = SequenceUtil.getSequence(sequence);
         StringBuilder sb = new StringBuilder();
         sb.append(date).append(bizCode).append(seq);
