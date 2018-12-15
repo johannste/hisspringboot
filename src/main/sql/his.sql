@@ -11,7 +11,7 @@
  Target Server Version : 50624
  File Encoding         : 65001
 
- Date: 14/12/2018 19:14:57
+ Date: 15/12/2018 12:51:59
 */
 
 SET NAMES utf8mb4;
@@ -322,13 +322,13 @@ INSERT INTO `register_manager` VALUES (4, '20181113000000000004', 0, '4408821995
 INSERT INTO `register_manager` VALUES (5, '20181113000000000005', 0, '440882199508132348', 4, 11, '2018-12-13', 14, 8);
 
 -- ----------------------------
--- View structure for register_list
+-- View structure for v_register_list
 -- ----------------------------
-DROP VIEW IF EXISTS `register_list`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `register_list` AS SELECT
+DROP VIEW IF EXISTS `v_register_list`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_register_list` AS SELECT
 	rm.id `序号`,
 	pl.`name` `患者姓名`,
-	rm.identify_type `挂号凭证`,
+	it.type `挂号凭证`,
 	d.dept_name `科室`,
 	doc.`name` `就诊医生`,
 	register_date `就诊日期`,
@@ -338,6 +338,7 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `register_list` AS SELECT
 FROM
 	register_manager rm
 	LEFT JOIN identify i ON rm.identify_number = i.identify_number
+	LEFT JOIN identify_type it ON rm.identify_type = it.id
 	LEFT JOIN patient_list pl ON i.uid = pl.id
 	LEFT JOIN department d ON rm.department_id = d.id
 	LEFT JOIN doctor doc ON rm.doctor_id = doc.id
