@@ -4,6 +4,8 @@ import com.neusoft.his.model.*;
 import org.apache.ibatis.annotations.*;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,9 @@ public interface PatientMapper {
 
     @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
     Boolean registerPatient(Map patientMap);
+
+    @Select("SELECT * FROM v_register_list;")
+    List<Map<String, RegisterList>> queryRegisterList();
 
     @Select("SELECT * FROM identify_type;")
     List<IdentifyType> queryIdentifyType();

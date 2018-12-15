@@ -56,6 +56,11 @@ public class PatienInformation {
         return patientMapper.registerPatient(patientMap);
     }
 
+    @GetMapping("/queryRegisterList")
+    public List<Map<String, RegisterList>> queryRegisterList() {
+        return patientMapper.queryRegisterList();
+    }
+
     @GetMapping("/queryIdentifyType")
     public List<IdentifyType> queryIdentifyType() {
         return patientMapper.queryIdentifyType();
