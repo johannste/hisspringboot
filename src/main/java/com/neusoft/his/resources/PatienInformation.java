@@ -56,6 +56,16 @@ public class PatienInformation {
         return patientMapper.registerPatient(patientMap);
     }
 
+    @GetMapping("/cancelRegisterStatus")
+    public Boolean cancelRegisterStatus(@RequestParam Integer id) {
+        return patientMapper.cancelRegisterStatus(id);
+    }
+
+    @GetMapping("/updateRegisterPayment")
+    public Boolean updateRegisterPayment(@RequestParam Integer id) {
+        return patientMapper.updateRegisterPayment(id);
+    }
+
     @GetMapping("/queryRegisterList")
     public List<Map<String, RegisterList>> queryRegisterList() {
         return patientMapper.queryRegisterList();

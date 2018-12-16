@@ -17,6 +17,12 @@ public interface PatientMapper {
     @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
     Boolean registerPatient(Map patientMap);
 
+    @Update("UPDATE register_manager SET status=0 WHERE id=#{id};")
+    Boolean cancelRegisterStatus(@PathParam("id") Integer id);
+
+    @Update("UPDATE register_manager SET is_paid=1, status=1 WHERE id=#{id};")
+    Boolean updateRegisterPayment(@PathParam("id") Integer id);
+
     @Select("SELECT * FROM v_register_list;")
     List<Map<String, RegisterList>> queryRegisterList();
 

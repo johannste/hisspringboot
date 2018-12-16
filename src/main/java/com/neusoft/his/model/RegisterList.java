@@ -10,6 +10,8 @@ public class RegisterList {
     private String time;
     private String registerNumber;
     private Integer expenses;
+    private String isPaid;
+    private String status;
 
     public Integer getId() {
         return id;
@@ -81,5 +83,21 @@ public class RegisterList {
 
     public void setExpenses(Integer expenses) {
         this.expenses = expenses;
+    }
+
+    public String getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(String isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
