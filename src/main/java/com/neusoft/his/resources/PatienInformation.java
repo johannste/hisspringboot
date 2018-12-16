@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.ServiceException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,15 +72,22 @@ public class PatienInformation {
         return patientMapper.queryRegisterList();
     }
 
+    @GetMapping("/queryAllPatient")
+    public List<Map<String, PatientList>> queryAllPatient() {
+        return patientMapper.queryAllPatient();
+    }
+
     @GetMapping("/queryIdentifyType")
     public List<IdentifyType> queryIdentifyType() {
         return patientMapper.queryIdentifyType();
     }
 
     @PostMapping("/getLastSerialNumber")
-    public String getLastSerialNumber(@RequestParam String bizCode) {
+    public List<String> getLastSerialNumber(@RequestBody BizCode bizCode) {
+        List<String> arrayList = new ArrayList<>();
         try {
-            return serialNumberService.generate(bizCode);
+            arrayList.add(serialNumberService.generate(bizCode.getBizCode()));
+            return arrayList;
         } catch (ServiceException e) {
             e.printStackTrace();
         }

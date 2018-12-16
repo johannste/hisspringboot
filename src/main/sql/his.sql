@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 16/12/2018 11:15:52
+ Date: 16/12/2018 21:59:17
 */
 
 SET NAMES utf8mb4;
@@ -169,6 +169,25 @@ INSERT INTO `expert` VALUES (1, 12);
 COMMIT;
 
 -- ----------------------------
+-- Table structure for gender
+-- ----------------------------
+DROP TABLE IF EXISTS `gender`;
+CREATE TABLE `gender` (
+  `id` int(1) NOT NULL,
+  `gender` varchar(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gender` (`gender`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of gender
+-- ----------------------------
+BEGIN;
+INSERT INTO `gender` VALUES (1, '女');
+INSERT INTO `gender` VALUES (0, '男');
+COMMIT;
+
+-- ----------------------------
 -- Table structure for identify
 -- ----------------------------
 DROP TABLE IF EXISTS `identify`;
@@ -180,9 +199,8 @@ CREATE TABLE `identify` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `identify_number` (`identify_number`) USING BTREE,
   KEY `identify_type` (`identify_type`) USING BTREE,
-  KEY `fk_identify_uid` (`uid`),
-  CONSTRAINT `fk_identify_uid` FOREIGN KEY (`uid`) REFERENCES `identify_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  CONSTRAINT `fk_identify_uid` FOREIGN KEY (`uid`) REFERENCES `patient_list` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of identify
@@ -196,6 +214,7 @@ INSERT INTO `identify` VALUES (5, 1, 0, '440882199508132346');
 INSERT INTO `identify` VALUES (6, 2, 0, '440882199508132347');
 INSERT INTO `identify` VALUES (7, 3, 0, '440882199508132348');
 INSERT INTO `identify` VALUES (8, 4, 0, '211234199402141291');
+INSERT INTO `identify` VALUES (9, 5, 0, '21030319940325101x');
 COMMIT;
 
 -- ----------------------------
@@ -244,10 +263,12 @@ CREATE TABLE `patient_list` (
   KEY `fk_patient_list_identify_type` (`identify_type`) USING BTREE,
   KEY `fk_relationship` (`relationship`),
   KEY `fk_patient_list_region` (`region`),
+  KEY `fk_patient_list_gender` (`gender`),
+  CONSTRAINT `fk_patient_list_gender` FOREIGN KEY (`gender`) REFERENCES `gender` (`id`),
   CONSTRAINT `fk_patient_list_identify_type` FOREIGN KEY (`identify_type`) REFERENCES `identify` (`identify_type`),
   CONSTRAINT `fk_patient_list_region` FOREIGN KEY (`region`) REFERENCES `patient_region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_patient_list_relationship` FOREIGN KEY (`relationship`) REFERENCES `patient_relationship` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of patient_list
@@ -257,6 +278,7 @@ INSERT INTO `patient_list` VALUES (1, '李丽', 1, 22, '广东省', '广州市',
 INSERT INTO `patient_list` VALUES (2, '赵青', 1, 21, '广东省', '广州市', 0, '广州华南师范大学尚志苑B1栋2楼', '13414935080', NULL, NULL, NULL, NULL, NULL, 2, '2018-12-07 21:42:44');
 INSERT INTO `patient_list` VALUES (3, '钱虎', 0, 23, '广东省', '广州市', 0, '广州华南师范大学尚志苑C栋2楼', '13414936979', NULL, NULL, NULL, NULL, NULL, 3, '2018-12-07 21:42:44');
 INSERT INTO `patient_list` VALUES (4, '曾雪花', 1, 23, '广东省', '湛江市', 0, '寸金桥29号尚志苑C栋3楼', '13414937053', NULL, NULL, NULL, NULL, NULL, 4, '2018-12-07 21:42:44');
+INSERT INTO `patient_list` VALUES (5, '钱花花', 1, 24, '辽宁省', '鞍山市', 0, '天门山五道口', '13898909000', '', '', NULL, '', '', 3, '2018-12-16 21:51:05');
 COMMIT;
 
 -- ----------------------------
@@ -310,7 +332,7 @@ COMMIT;
 DROP TABLE IF EXISTS `register_manager`;
 CREATE TABLE `register_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `register_number` varchar(20) NOT NULL,
+  `register_number` varchar(20) NOT NULL UNIQUE,
   `identify_type` int(1) NOT NULL,
   `identify_number` varchar(18) NOT NULL,
   `department_id` int(1) NOT NULL,
@@ -388,6 +410,12 @@ INSERT INTO `register_status` VALUES (2, '待生效');
 INSERT INTO `register_status` VALUES (0, '无效');
 INSERT INTO `register_status` VALUES (1, '有效');
 COMMIT;
+
+-- ----------------------------
+-- View structure for v_patient_list
+-- ----------------------------
+DROP VIEW IF EXISTS `v_patient_list`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_patient_list` AS select `pl`.`id` AS `序号`,`pl`.`name` AS `姓名`,`g`.`gender` AS `性别`,`pl`.`age` AS `年龄`,`pl`.`province` AS `省份`,`pl`.`city` AS `城市`,`pl`.`more_address` AS `详细地址`,`it`.`type` AS `挂号凭证`,`i`.`identify_number` AS `凭证号`,`pl`.`phone` AS `手机`,`pl`.`related_name` AS `联系人姓名`,`pl`.`related_phone_number` AS `联系方式`,`prs`.`type` AS `与患者关系`,`pl`.`symptoms` AS `身体状况`,`pl`.`ill_history` AS `病史`,`pr`.`type` AS `患者来源`,`pl`.`create_date` AS `注册时间` from (((((`patient_list` `pl` left join `identify_type` `it` on((`pl`.`identify_type` = `it`.`id`))) left join `patient_region` `pr` on((`pl`.`region` = `pr`.`id`))) left join `gender` `g` on((`pl`.`gender` = `g`.`id`))) left join `identify` `i` on((`pl`.`id` = `i`.`uid`))) left join `patient_relationship` `prs` on((`pl`.`relationship` = `prs`.`id`)));
 
 -- ----------------------------
 -- View structure for v_register_list

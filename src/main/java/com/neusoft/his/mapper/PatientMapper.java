@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface PatientMapper {
 
-    @Insert("INSERT INTO register_manager VALUES (NULL, #{register_number}, #{identify_type}, #{identify_number}, #{department_id}, #{doctor_id}, #{register_date}, #{diagnose_time}, #{expense});")
+    @Insert("INSERT INTO register_manager VALUES (NULL, #{register_number}, #{identify_type}, #{identify_number}, #{department_id}, #{doctor_id}, #{register_date}, #{diagnose_time}, #{expense}, 0, 2);")
     Boolean registration(Map registrationMap);
 
     @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
@@ -25,6 +25,9 @@ public interface PatientMapper {
 
     @Select("SELECT * FROM v_register_list;")
     List<Map<String, RegisterList>> queryRegisterList();
+
+    @Select("SELECT * FROM v_patient_list;")
+    List<Map<String, PatientList>> queryAllPatient();
 
     @Select("SELECT * FROM identify_type;")
     List<IdentifyType> queryIdentifyType();
