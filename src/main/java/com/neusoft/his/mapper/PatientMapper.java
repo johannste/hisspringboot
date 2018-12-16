@@ -14,7 +14,8 @@ public interface PatientMapper {
     @Insert("INSERT INTO register_manager VALUES (NULL, #{register_number}, #{identify_type}, #{identify_number}, #{department_id}, #{doctor_id}, #{register_date}, #{diagnose_time}, #{expense}, 0, 2);")
     Boolean registration(Map registrationMap);
 
-    @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());")
+    @Insert("INSERT INTO patient_list VALUES (NULL, #{name}, #{gender}, #{age}, #{province}, #{city}, 0, #{more_address}, #{phone}, #{related_name}, #{related_phone_number}, #{relationship}, #{symptoms}, #{ill_history}, #{region}, sysdate());" +
+            "INSERT INTO identify VALUES (NULL, (SELECT id FROM patient_list ORDER BY id DESC LIMIT 1), 0, #{identify_number});")
     Boolean registerPatient(Map patientMap);
 
     @Update("UPDATE register_manager SET status=0 WHERE id=#{id};")

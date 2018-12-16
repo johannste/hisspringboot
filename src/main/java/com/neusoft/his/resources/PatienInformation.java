@@ -46,6 +46,7 @@ public class PatienInformation {
         patientMap.put("age", patient.getAge().toString());
         patientMap.put("province", patient.getProvince().toString());
         patientMap.put("city", patient.getCity().toString());
+        patientMap.put("identify_number", patient.getIdCard().toString());
         patientMap.put("more_address", patient.getMoreAddress().toString());
         patientMap.put("phone", patient.getPhone().toString());
         patientMap.put("related_name", patient.getRelatedName().toString());
