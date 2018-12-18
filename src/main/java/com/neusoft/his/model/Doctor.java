@@ -1,12 +1,10 @@
 package com.neusoft.his.model;
 
-import java.util.Date;
-
 public class Doctor {
     private Integer id;
     private String name;
     private Integer gender;
-    private Date hiredate;
+    private String hireDate;
     private Integer degreeId;
     private String major;
     private String profession;
@@ -38,12 +36,12 @@ public class Doctor {
         this.gender = gender;
     }
 
-    public Date getHiredate() {
-        return hiredate;
+    public String gethireDate() {
+        return hireDate;
     }
 
-    public void setHiredate(Date hiredate) {
-        this.hiredate = hiredate;
+    public void sethireDate(String hireDate) {
+        this.hireDate = hireDate;
     }
 
     public Integer getDegreeId() {

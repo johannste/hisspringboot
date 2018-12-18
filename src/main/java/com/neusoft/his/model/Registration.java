@@ -1,7 +1,5 @@
 package com.neusoft.his.model;
 
-import java.util.Date;
-
 public class Registration {
     private String registerNumber;
     private Integer identifyType;

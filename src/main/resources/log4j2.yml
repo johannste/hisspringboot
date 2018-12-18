@@ -23,16 +23,14 @@ Configuration:
         onMatch: ACCEPT
         onMismatch: DENY
       PatternLayout:
-        pattern: "%highlight{%d{HH:mm:ss.SSS} [%t] %-5level %logger{1.}:%L - %msg%n}{%throwable{short.fileName}}{FATAL=white,ERROR=red,
-                            WARN=blue, INFO=black, DEBUG=green, TRACE=blue}"
+        pattern: "%d{HH:mm:ss.SSS} [%t] %highlight{%-5level}{%throwable{short.fileName}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}} - %msg%n"
     RollingFile: # 输出到文件，超过128MB归档
     - name: ROLLING_FILE
       ignoreExceptions: false
       fileName: log/${project.name}.log
       filePattern: "log/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
       PatternLayout:
-        pattern: "%highlight{%d{HH:mm:ss.SSS} [%t] %-5level %logger{1.}:%L - %msg%n}{%throwable{short.fileName}}{FATAL=white,ERROR=red,
-                            WARN=blue, INFO=black, DEBUG=green, TRACE=blue}"
+        pattern: "%d{HH:mm:ss.SSS} [%t] %highlight{%-5level}{%throwable{short.fileName}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}} - %msg%n"
       Policies:
         SizeBasedTriggeringPolicy:
           size: "128 MB"
