@@ -3,6 +3,7 @@ package com.neusoft.his.resources;
 import com.neusoft.his.mapper.PatientMapper;
 import com.neusoft.his.model.*;
 import com.neusoft.his.util.SerialNumberService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +72,11 @@ public class PatienInformation {
     @GetMapping("/queryRegisterList")
     public List<Map<String, RegisterList>> queryRegisterList() {
         return patientMapper.queryRegisterList();
+    }
+
+    @GetMapping("/queryRegisterListByPage")
+    public List<Map<String, RegisterList>> queryRegisterListByPage(@Param("begin") Integer begin, @Param("end") Integer end) {
+        return patientMapper.queryRegisterListByPage(begin, end);
     }
 
     @GetMapping("/queryAllPatient")

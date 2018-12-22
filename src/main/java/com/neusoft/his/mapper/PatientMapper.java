@@ -27,7 +27,10 @@ public interface PatientMapper {
     @Select("SELECT * FROM v_register_list;")
     List<Map<String, RegisterList>> queryRegisterList();
 
-    @Select("SELECT * FROM v_patient_list;")
+    @Select("SELECT * FROM v_register_list LIMIT #{begin}, #{end};")
+    List<Map<String, RegisterList>> queryRegisterListByPage(@Param("begin") Integer begin, @Param("end") Integer end);
+
+    @Select("queryRegisterList;")
     List<Map<String, PatientList>> queryAllPatient();
 
     @Select("SELECT * FROM identify_type;")
